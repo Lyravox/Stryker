@@ -1,4 +1,4 @@
-![](bot/images/banner.jpeg)
+![](bot/images/image.jpeg)
 
 # Stryker
 
