@@ -41,9 +41,24 @@ class Information(commands.Cog):
         
         await interaction.response.send_message(embed=embed)
 
+    @nextcord.slash_command(description="Returns info about the given user")
+    async def userinfo(self, interaction: Interaction, member: Member = None):
+        if member is None:
+            member = interaction.user
+        name = member.mention
+        avatar = member.avatar.url
+        creation = member.created_at.strftime("%b %d %Y - %H:%M ")
+        id = member.id
+        
+        embed = nextcord.Embed(title=f"{member.name}'s Information", color=0x4b5320)
+        embed.set_thumbnail(avatar)
+        embed.add_field(name="Member", value=f"{name}")
+        embed.set_footer(icon_url=avatar, text=f"ID: {id} | Created • {creation}")
+        
+        await interaction.response.send_message(embed=embed)
     
     @nextcord.slash_command(description="Returns the given users avatar")
-    async def avatar(self, interaction: Interaction, member: Member):
+    async def avatar(self, interaction: Interaction, member: Member = None):
         if member is None:
             member = interaction.user
         avatar_url = str(member.avatar.url)
